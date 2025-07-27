@@ -123,8 +123,11 @@ export default {
 				'float': 'float 3s ease-in-out infinite'
 			},
 			fontFamily: {
-				'cinematic': ['Georgia', 'serif'],
-				'ui': ['Inter', 'sans-serif']
+				'cinematic': ['Playfair Display', 'serif'],
+				'ui': ['Inter', 'sans-serif'],
+				'poppins': ['Poppins', 'sans-serif'],
+				'dancing': ['Dancing Script', 'cursive'],
+				'playfair': ['Playfair Display', 'serif']
 			}
 		}
 	},
