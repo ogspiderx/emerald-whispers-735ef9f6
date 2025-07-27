@@ -40,8 +40,8 @@ All colors MUST be HSL.
     --radius: 0.5rem;
 
     /* Cinematic Variables */
-    --glow-primary: 120 100% 50%;
-    --glow-secondary: 120 80% 40%;
+    --glow-primary: 120 100% 60%;
+    --glow-secondary: 120 90% 50%;
     --shadow-glow: 0 0 30px hsl(var(--glow-primary) / 0.5);
     --shadow-intense: 0 0 60px hsl(var(--glow-primary) / 0.8);
     
@@ -89,7 +89,12 @@ All colors MUST be HSL.
   }
 
   .text-glow {
-    text-shadow: var(--shadow-glow);
+    text-shadow: 0 0 40px hsl(var(--glow-primary) / 1), 0 0 80px hsl(var(--glow-primary) / 0.6);
+  }
+  
+  .text-glow-primary {
+    color: hsl(var(--glow-primary));
+    text-shadow: 0 0 40px hsl(var(--glow-primary) / 1), 0 0 80px hsl(var(--glow-primary) / 0.6);
   }
 
   /* Particle Effects */

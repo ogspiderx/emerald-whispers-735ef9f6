@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { Headphones } from 'lucide-react';
 
 interface Scene1HeadphonesProps {
   onBegin: () => void;
@@ -23,7 +24,7 @@ const Scene1Headphones: React.FC<Scene1HeadphonesProps> = ({ onBegin }) => {
 
     // Typing effect for the text
     if (textRef.current) {
-      const text = "🎧 Kindly wear your headphones";
+      const text = "Kindly wear your headphones";
       const textElement = textRef.current;
       textElement.innerHTML = "";
       
@@ -74,11 +75,20 @@ const Scene1Headphones: React.FC<Scene1HeadphonesProps> = ({ onBegin }) => {
       ref={containerRef}
       className="flex flex-col items-center justify-center h-full px-8"
     >
+      <div className="flex items-center justify-center mb-8">
+        <Headphones 
+          size={48} 
+          className="text-glow-primary mr-4"
+          style={{
+            filter: 'drop-shadow(0 0 20px hsl(var(--glow-primary) / 0.8))',
+          }}
+        />
+      </div>
       <div 
         ref={textRef}
-        className="text-2xl md:text-4xl font-ui text-glow-primary text-center mb-12 typing-text"
+        className="text-2xl md:text-4xl font-dancing text-glow-primary text-center mb-12 typing-text"
         style={{
-          textShadow: '0 0 30px hsl(var(--glow-primary) / 0.8)',
+          textShadow: '0 0 40px hsl(var(--glow-primary) / 1), 0 0 80px hsl(var(--glow-primary) / 0.5)',
         }}
       />
       

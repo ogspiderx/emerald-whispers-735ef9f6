@@ -6,7 +6,7 @@ import * as THREE from 'three';
 const ParticleField: React.FC = () => {
   const pointsRef = useRef<THREE.Points>(null);
   
-  const particleCount = 200;
+  const particleCount = 500;
   
   const particles = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
@@ -62,11 +62,11 @@ const ParticleField: React.FC = () => {
     >
       <PointMaterial
         transparent
-        color="#00ff00"
-        size={0.05}
+        color="#00ff88"
+        size={0.08}
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.6}
+        opacity={0.9}
         blending={THREE.AdditiveBlending}
       />
     </Points>

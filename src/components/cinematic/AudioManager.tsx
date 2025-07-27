@@ -17,8 +17,9 @@ const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
 
     // Create audio context for cinematic music
     const musicAudio = new Audio();
+    musicAudio.src = '/audio/background-music.mp3'; // Put your MP3 file here
     musicAudio.loop = true;
-    musicAudio.volume = 0.5;
+    musicAudio.volume = 0.4;
     musicRef.current = musicAudio;
 
     // For now, we'll use data URLs for simple tones
@@ -60,9 +61,7 @@ const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
 
     const playMusic = () => {
       if (musicRef.current && currentScene === 'text') {
-        // In a real implementation, you'd load and play actual music files
-        // For now, we'll create a simple harmonic background
-        console.log('Playing cinematic music for text scene');
+        musicRef.current.play().catch(console.error);
       }
     };
 
