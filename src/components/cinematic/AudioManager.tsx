@@ -17,7 +17,8 @@ const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
 
     // Create audio context for cinematic music
     const musicAudio = new Audio();
-    musicAudio.src = '/audio/background-music.mp3'; // Put your MP3 file here
+    musicAudio.src = '/audio/background-music.mp3';
+    musicAudio.preload = 'auto'; // Put your MP3 file here
     musicAudio.loop = true;
     musicAudio.volume = 0.4;
     musicRef.current = musicAudio;
