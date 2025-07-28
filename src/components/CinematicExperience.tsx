@@ -5,7 +5,7 @@ import Scene1Headphones from './cinematic/Scene1Headphones';
 import Scene2Transition from './cinematic/Scene2Transition';
 import Scene3TextReveal from './cinematic/Scene3TextReveal';
 import Scene4Ending from './cinematic/Scene4Ending';
-import InteractiveBackground from './cinematic/InteractiveBackground';
+import ParticleField from './cinematic/ParticleField';
 import AudioManager from './cinematic/AudioManager';
 
 type Scene = 'headphones' | 'transition' | 'text' | 'ending';
@@ -13,8 +13,6 @@ type Scene = 'headphones' | 'transition' | 'text' | 'ending';
 const CinematicExperience: React.FC = () => {
   const [currentScene, setCurrentScene] = useState<Scene>('headphones');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isClicking, setIsClicking] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const filmGrainRef = useRef<HTMLDivElement>(null);
 
@@ -24,24 +22,6 @@ const CinematicExperience: React.FC = () => {
       gsap.set(containerRef.current, { opacity: 0 });
       gsap.to(containerRef.current, { opacity: 1, duration: 1 });
     }
-
-    // Mouse tracking
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
   }, []);
 
   const transitionToScene = (nextScene: Scene, delay = 0) => {
@@ -66,13 +46,10 @@ const CinematicExperience: React.FC = () => {
       {/* Film Grain Effect */}
       <div ref={filmGrainRef} className="film-grain" />
       
-      {/* Interactive WebGL Background */}
+      {/* WebGL Particle Background */}
       <div className="absolute inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5] }}>
-          <InteractiveBackground 
-            mousePosition={mousePosition} 
-            isClicking={isClicking}
-          />
+          <ParticleField />
         </Canvas>
       </div>
 
