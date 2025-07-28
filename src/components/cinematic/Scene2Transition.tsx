@@ -38,16 +38,6 @@ const Scene2Transition: React.FC<Scene2TransitionProps> = ({ onComplete }) => {
         }
       }
     })
-    .to(flashRef.current, {
-      opacity: 1,
-      duration: 0.1,
-      ease: "power2.out"
-    }, "-=0.5")
-    .to(flashRef.current, {
-      opacity: 0,
-      duration: 0.2,
-      ease: "power2.out"
-    })
     .to(containerRef.current, {
       opacity: 0,
       duration: 0.5,
@@ -64,11 +54,6 @@ const Scene2Transition: React.FC<Scene2TransitionProps> = ({ onComplete }) => {
       ref={containerRef}
       className="absolute inset-0 flex items-center justify-center"
     >
-      {/* Flash effect */}
-      <div
-        ref={flashRef}
-        className="absolute inset-0 bg-white opacity-0 z-50"
-      />
       
       {/* Button halves */}
       <div className="relative">

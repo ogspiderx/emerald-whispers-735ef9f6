@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 interface AudioManagerProps {
-  currentScene: 'headphones' | 'transition' | 'text' | 'ending';
+  currentScene: 'headphones' | 'transition' | 'choices' | 'memory' | 'text' | 'ending';
 }
 
 const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
