@@ -7,39 +7,33 @@ interface Scene3TextRevealProps {
 
 const textLines = [
   { text: "First of all...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "Relax, Sit back...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "Happy first anniversary my sexy gurl 💕...", font: "font-dancing", size: "text-3xl md:text-5xl" },
+  { text: "Relax, sit back...", font: "font-dancing", size: "text-2xl md:text-4xl" },
+  { text: "Happy first anniversary my love 💕", font: "font-dancing", size: "text-3xl md:text-5xl" },
   { text: "One month down, forever to go...", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "But don't worry, I will always be here for you...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "To support you, to love you, and to annoy you 😁...", font: "font-dancing", size: "text-xl md:text-3xl" },
+  { text: "I will always be here for you...", font: "font-dancing", size: "text-2xl md:text-4xl" },
+  { text: "To support you, to love you, and to annoy you 😁", font: "font-dancing", size: "text-xl md:text-3xl" },
   { text: "I know we have our ups and downs...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "And I know I get annoying sometimes🤭...", font: "font-dancing", size: "text-xl md:text-3xl" },
+  { text: "And I know I get annoying sometimes 🤭", font: "font-dancing", size: "text-xl md:text-3xl" },
   { text: "But I promise to always try my best...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "And even when we argue,", font: "font-dancing", size: "text-lg md:text-2xl" },
+  { text: "Even when we argue,", font: "font-dancing", size: "text-lg md:text-2xl" },
   { text: "I never stop caring... not even for a second.", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "You’re not just my girlfriend — you’re my peace and my chaos.", font: "font-dancing", size: "text-2xl md:text-4xl" },
+  { text: "You're not just my girlfriend — you're my peace and my chaos.", font: "font-dancing", size: "text-2xl md:text-4xl" },
   { text: "Through every laugh, every tear, every silence...", font: "font-dancing", size: "text-xl md:text-3xl" },
   { text: "I choose you. Over and over again.", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "Happy 1st, my love — let’s keep writing this story together. 💞", font: "font-dancing", size: "text-2xl md:text-4xl" },
   { text: "I know the past wasn't good for both of us...", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "And I appericiate you for still letting me in...", font: "font-dancing", size: "text-xl md:text-3xl" },
+  { text: "And I appreciate you for still letting me in...", font: "font-dancing", size: "text-xl md:text-3xl" },
   { text: "I know I can be a pain sometimes...", font: "font-dancing", size: "text-2xl md:text-4xl" },
   { text: "But that's just because I care so much about you...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "I was also worried like we argue alot...", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "and what if we break up...", font: "font-dancing", size: "text-xl md:text-3xl" },
+  { text: "I was worried that we argue a lot...", font: "font-dancing", size: "text-xl md:text-3xl" },
+  { text: "And what if we break up...", font: "font-dancing", size: "text-xl md:text-3xl" },
   { text: "But I am sure now that it will never happen...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "Until we have each other, we will always be together...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "I love you so much, and I am so grateful for you.", font: "font-dancing", size: "text-3xl md:text-5xl" },
-  { text: "...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "I also want to say that my my life...", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "I am sorry who am I...", font: "font-dancing", size: "text-xl md:text-3xl" },
+  { text: "As long as we have each other, we will always be together.", font: "font-dancing", size: "text-2xl md:text-4xl" },
   { text: "I am sorry for the times I made you cry...", font: "font-dancing", size: "text-xl md:text-3xl" },
   { text: "I am not perfect, but I am trying to be better...", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "...", font: "font-dancing", size: "text-xl md:text-3xl" },
-  { text: "However, thanks for understanding me🤭😁...", font: "font-dancing", size: "text-2xl md:text-4xl" },
-  { text: "I love you my sexy gurl 💕...", font: "font-dancing", size: "text-3xl md:text-5xl" },
+  { text: "Thanks for understanding me 🤭😁", font: "font-dancing", size: "text-2xl md:text-4xl" },
+  { text: "I love you so much, and I am so grateful for you.", font: "font-dancing", size: "text-3xl md:text-5xl" },
+  { text: "Happy 1st, my love — let's keep writing this story together. 💞", font: "font-dancing", size: "text-2xl md:text-4xl" },
 ];
-
 
 const Scene3TextReveal: React.FC<Scene3TextRevealProps> = ({ onComplete }) => {
   const [currentLineIndex, setCurrentLineIndex] = useState(-1);
@@ -142,7 +136,7 @@ const Scene3TextReveal: React.FC<Scene3TextRevealProps> = ({ onComplete }) => {
               text-glow-primary
               ${currentLine?.font || 'font-poppins'}
               ${currentLine?.size || 'text-2xl md:text-4xl'}
-              ${currentLine?.text.includes('💚') ? 'mb-0' : ''}
+              ${currentLine?.text.includes('💞') ? 'mb-0' : ''}
               ${isTyping ? 'border-r-2 border-glow-primary' : ''}
             `}
             style={{
