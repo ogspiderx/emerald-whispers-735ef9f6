@@ -7,12 +7,18 @@ import Scene3TextReveal from './cinematic/Scene3TextReveal';
 import Scene4Ending from './cinematic/Scene4Ending';
 import ParticleField from './cinematic/ParticleField';
 import AudioManager from './cinematic/AudioManager';
+import MusicLoader from './cinematic/MusicLoader';
+import MusicControls from './cinematic/MusicControls';
+import ClickEffects from './cinematic/ClickEffects';
 
-type Scene = 'headphones' | 'transition' | 'text' | 'ending';
+type Scene = 'loading' | 'headphones' | 'transition' | 'text' | 'ending';
 
 const CinematicExperience: React.FC = () => {
-  const [currentScene, setCurrentScene] = useState<Scene>('headphones');
+  const [currentScene, setCurrentScene] = useState<Scene>('loading');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [musicStarted, setMusicStarted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [volume, setVolume] = useState(0.4);
   const containerRef = useRef<HTMLDivElement>(null);
   const filmGrainRef = useRef<HTMLDivElement>(null);
 
@@ -34,8 +40,23 @@ const CinematicExperience: React.FC = () => {
   };
 
   const resetExperience = () => {
-    setCurrentScene('headphones');
+    setCurrentScene('loading');
     setIsTransitioning(false);
+    setMusicStarted(false);
+    setIsPlaying(true);
+  };
+
+  const handleMusicLoadComplete = () => {
+    setCurrentScene('headphones');
+  };
+
+  const handleBeginExperience = () => {
+    setMusicStarted(true);
+    transitionToScene('transition', 500);
+  };
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -55,9 +76,13 @@ const CinematicExperience: React.FC = () => {
 
       {/* Main Content */}
       <div className="absolute inset-0 z-10">
+        {currentScene === 'loading' && (
+          <MusicLoader onLoadComplete={handleMusicLoadComplete} />
+        )}
+        
         {currentScene === 'headphones' && (
           <Scene1Headphones 
-            onBegin={() => transitionToScene('transition', 500)}
+            onBegin={handleBeginExperience}
           />
         )}
         
@@ -81,7 +106,25 @@ const CinematicExperience: React.FC = () => {
       </div>
 
       {/* Audio Manager */}
-      <AudioManager currentScene={currentScene} />
+      <AudioManager 
+        currentScene={currentScene}
+        musicStarted={musicStarted}
+        isPlaying={isPlaying}
+        volume={volume}
+      />
+
+      {/* Music Controls */}
+      {currentScene !== 'loading' && currentScene !== 'headphones' && (
+        <MusicControls
+          isPlaying={isPlaying}
+          onTogglePlay={togglePlay}
+          volume={volume}
+          onVolumeChange={setVolume}
+        />
+      )}
+
+      {/* Click Effects */}
+      <ClickEffects />
     </div>
   );
 };

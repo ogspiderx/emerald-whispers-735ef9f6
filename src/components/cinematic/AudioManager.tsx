@@ -1,10 +1,22 @@
 import React, { useEffect, useRef } from 'react';
 
 interface AudioManagerProps {
-  currentScene: 'headphones' | 'transition' | 'text' | 'ending';
+  currentScene: 'loading' | 'headphones' | 'transition' | 'text' | 'ending';
+  onMusicReady?: () => void;
+  musicStarted?: boolean;
+  onMusicStarted?: () => void;
+  isPlaying?: boolean;
+  volume?: number;
 }
 
-const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
+const AudioManager: React.FC<AudioManagerProps> = ({ 
+  currentScene, 
+  onMusicReady, 
+  musicStarted = false, 
+  onMusicStarted,
+  isPlaying = true,
+  volume = 0.4 
+}) => {
   const ambientRef = useRef<HTMLAudioElement>(null);
   const musicRef = useRef<HTMLAudioElement>(null);
 
@@ -18,10 +30,17 @@ const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
     // Create audio context for cinematic music
     const musicAudio = new Audio();
     musicAudio.src = '/audio/background-music.mp3';
-    musicAudio.preload = 'auto'; // Put your MP3 file here
+    musicAudio.preload = 'auto';
     musicAudio.loop = true;
-    musicAudio.volume = 0.4;
+    musicAudio.volume = volume;
     musicRef.current = musicAudio;
+
+    // Notify when music is ready
+    const handleCanPlayThrough = () => {
+      onMusicReady?.();
+    };
+    
+    musicAudio.addEventListener('canplaythrough', handleCanPlayThrough);
 
     // For now, we'll use data URLs for simple tones
     // In a real implementation, you'd load actual audio files
@@ -29,6 +48,7 @@ const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
     return () => {
       ambientAudio.pause();
       musicAudio.pause();
+      musicAudio.removeEventListener('canplaythrough', handleCanPlayThrough);
     };
   }, []);
 
@@ -61,17 +81,39 @@ const AudioManager: React.FC<AudioManagerProps> = ({ currentScene }) => {
     };
 
     const playMusic = () => {
-      if (musicRef.current && currentScene === 'text') {
+      if (musicRef.current && musicStarted && isPlaying) {
         musicRef.current.play().catch(console.error);
+        onMusicStarted?.();
       }
     };
 
+    const pauseMusic = () => {
+      if (musicRef.current) {
+        musicRef.current.pause();
+      }
+    };
+
+    // Update volume
+    if (musicRef.current) {
+      musicRef.current.volume = volume;
+    }
+
     if (currentScene === 'headphones') {
       playAmbient();
-    } else if (currentScene === 'text') {
-      playMusic();
+    } else if (currentScene === 'transition' && musicStarted) {
+      if (isPlaying) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
+    } else if (currentScene === 'text' || currentScene === 'ending') {
+      if (isPlaying) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
     }
-  }, [currentScene]);
+  }, [currentScene, musicStarted, isPlaying, volume]);
 
   return null; // This component doesn't render anything visible
 };
